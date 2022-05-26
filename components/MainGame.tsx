@@ -10,7 +10,7 @@ import {
   PLAYER1COLOR,
   PLAYER2,
   PLAYER2COLOR,
-  X
+  X,
 } from "../constants";
 import { checkWin } from "../helpers/checkWin";
 import { RootState } from "../store";
@@ -38,15 +38,12 @@ const MainGame = () => {
       dispatch(setWinner(DRAW));
     }
 
-    switch (checkWin(board)) {
-      case X:
-        dispatch(setWinner(PLAYER1));
-      case O:
-        dispatch(setWinner(PLAYER2));
+    let theWinner = checkWin(board);
 
-      default:
-        nextPlayer();
-    }
+    if (theWinner === X) dispatch(setWinner(PLAYER1));
+    if (theWinner === O) dispatch(setWinner(PLAYER2));
+
+    nextPlayer();
   };
 
   const nextPlayer = () => {
